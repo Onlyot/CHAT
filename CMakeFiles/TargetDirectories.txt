@@ -1,0 +1,10 @@
+/home/danna/Desktop/CHAT/CMakeFiles/rebuild_cache.dir
+/home/danna/Desktop/CHAT/CMakeFiles/edit_cache.dir
+/home/danna/Desktop/CHAT/src/CMakeFiles/rebuild_cache.dir
+/home/danna/Desktop/CHAT/src/CMakeFiles/edit_cache.dir
+/home/danna/Desktop/CHAT/src/server/CMakeFiles/rebuild_cache.dir
+/home/danna/Desktop/CHAT/src/server/CMakeFiles/ChatServer.dir
+/home/danna/Desktop/CHAT/src/server/CMakeFiles/edit_cache.dir
+/home/danna/Desktop/CHAT/src/client/CMakeFiles/rebuild_cache.dir
+/home/danna/Desktop/CHAT/src/client/CMakeFiles/ChatClient.dir
+/home/danna/Desktop/CHAT/src/client/CMakeFiles/edit_cache.dir

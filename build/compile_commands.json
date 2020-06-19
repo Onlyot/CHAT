@@ -1,0 +1,47 @@
+[
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/server",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatServer.dir/chatserver.cpp.o -c /home/danna/Desktop/CHAT/src/server/chatserver.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/server/chatserver.cpp"
+},
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/server",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatServer.dir/chatservice.cpp.o -c /home/danna/Desktop/CHAT/src/server/chatservice.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/server/chatservice.cpp"
+},
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/server",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatServer.dir/main.cpp.o -c /home/danna/Desktop/CHAT/src/server/main.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/server/main.cpp"
+},
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/server",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatServer.dir/db/db.cpp.o -c /home/danna/Desktop/CHAT/src/server/db/db.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/server/db/db.cpp"
+},
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/server",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatServer.dir/model/friendmodel.cpp.o -c /home/danna/Desktop/CHAT/src/server/model/friendmodel.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/server/model/friendmodel.cpp"
+},
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/server",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatServer.dir/model/groupmodel.cpp.o -c /home/danna/Desktop/CHAT/src/server/model/groupmodel.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/server/model/groupmodel.cpp"
+},
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/server",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatServer.dir/model/offlinemessagemodel.cpp.o -c /home/danna/Desktop/CHAT/src/server/model/offlinemessagemodel.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/server/model/offlinemessagemodel.cpp"
+},
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/server",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatServer.dir/model/usermodel.cpp.o -c /home/danna/Desktop/CHAT/src/server/model/usermodel.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/server/model/usermodel.cpp"
+},
+{
+  "directory": "/home/danna/Desktop/CHAT/build/src/client",
+  "command": "/usr/bin/c++   -I/home/danna/Desktop/CHAT/include -I/home/danna/Desktop/CHAT/include/server -I/home/danna/Desktop/CHAT/thirdparty -I/home/danna/Desktop/CHAT/include/server/db -I/home/danna/Desktop/CHAT/include/server/model  -g -g   -o CMakeFiles/ChatClient.dir/main.cpp.o -c /home/danna/Desktop/CHAT/src/client/main.cpp",
+  "file": "/home/danna/Desktop/CHAT/src/client/main.cpp"
+}
+]
