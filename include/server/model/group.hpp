@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 
-// User表的ORM类
+// GroupUser & AllGroup 表的ORM类
 class Group
 {
 public:

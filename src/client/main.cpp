@@ -41,15 +41,15 @@ void mainMenu(int);
 // 聊天客户端程序实现，main线程用作发送线程，子线程用作接收线程
 int main(int argc, char **argv)
 {
-    // if (argc < 3)
-    // {
-    //     cerr << "command invalid! example: ./ChatClient 127.0.0.1 6000" << endl;
-    //     exit(-1);
-    // }
+    if (argc < 3)
+    {
+        cerr << "command invalid! example: ./ChatClient 127.0.0.1 6000" << endl;
+        exit(-1);
+    }
 
     // 解析通过命令行参数传递的ip和port
-    const char *ip = "127.0.0.1"; //argv[1];
-    uint16_t port = 6000; // atoi(argv[2]);
+    const char *ip = argv[1];
+    uint16_t port = atoi(argv[2]);
 
     // 创建client端的socket
     int clientfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -292,8 +292,15 @@ void readTaskHandler(int clientfd)
             exit(-1);
         }
 
+        cout << "==================Begin=====================" << endl;
+
+        cout << buffer << endl;
+
         // 接收ChatServer转发的数据，反序列化生成json数据对象
         json js = json::parse(buffer);
+
+        cout << "==================Stop=====================" << endl;
+
         int msgtype = js["msgid"].get<int>();
         if (ONE_CHAT_MSG == msgtype)
         {
@@ -445,6 +452,7 @@ void chat(int clientfd, string str)
 
     int friendid = atoi(str.substr(0, idx).c_str());
     string message = str.substr(idx + 1, str.size() - idx);
+
 
     json js;
     js["msgid"] = ONE_CHAT_MSG;

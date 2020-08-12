@@ -5,6 +5,9 @@
 #include <map>
 using namespace muduo;
 
+// Test
+#include <iostream>
+
 // 获取单例对象指针的函数接口
 ChatService* ChatService::instance()
 {
@@ -26,6 +29,11 @@ ChatService::ChatService()
     _msgHandlerMap.insert({CREATE_GROUP_MSG, std::bind(&ChatService::createGroup, this, _1, _2, _3)});
     _msgHandlerMap.insert({ADD_GROUP_MSG, std::bind(&ChatService::addGroup, this, _1, _2, _3)});
     _msgHandlerMap.insert({GROUP_CHAT_MSG, std::bind(&ChatService::groupChat, this, _1, _2, _3)});
+
+    if(_redis.connect())
+    {
+        _redis.init_notify_handler(std::bind(&ChatService::handleRedisSubscribeMessage, this, _1, _2));
+    }
 }
 
  // 服务器异常退出，业务重置方法
@@ -52,7 +60,8 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
             response["errmsg"] = "the user had online";
 
             conn->send(response.dump());
-        }else{
+        }
+        else{
             
             {
                 // 登录成功并保存连接（要考虑线程安全）
@@ -60,6 +69,9 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
                 _userConnMap.insert({id, conn});
                 // 上述设计的优点使得无须额外增加解锁的操作，让系统一次释放资源
             }
+
+            // id用户登录成功后，订阅消息队列
+            _redis.subscribe(id);
 
             // 更新用户状态信息
             user.setState("online");
@@ -90,7 +102,7 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js, Timestamp time)
                     js["state"] = user.getState();
                     vec2.push_back(js.dump());
                 }
-                response["friend"] = vec2;
+                response["friends"] = vec2;
             }
 
             // 查询用户的群组信息
@@ -147,7 +159,7 @@ void ChatService::loginout(const TcpConnectionPtr &conn, json &js, Timestamp tim
     }
 
     // 用户注销，相当于就是下线，在redis中取消订阅通道
-    //_redis.unsubscribe(userid); 
+    _redis.unsubscribe(userid); 
 
     // 更新用户的状态信息
     User user(userid, "", "", "offline");
@@ -209,6 +221,9 @@ void ChatService::clientCloseException(const TcpConnectionPtr& conn)
         }
     }
 
+    // 取消用户的订阅
+    _redis.unsubscribe(user.getId());
+
     if(user.getId() != -1){
         // 更新用户的状态信息
         user.setState("offline");
@@ -219,6 +234,9 @@ void ChatService::clientCloseException(const TcpConnectionPtr& conn)
 // 一对一聊天业务
 void ChatService::oneChat(const TcpConnectionPtr &con, json &js, Timestamp time)
 {
+    // Test
+    std::cout << js.dump() << std::endl;
+
     int toid = js["toid"].get<int>();
     {
         lock_guard<mutex> lock(_connMutex);
@@ -230,10 +248,18 @@ void ChatService::oneChat(const TcpConnectionPtr &con, json &js, Timestamp time)
             return;
         }
     }
+
+    // 判断用户是否在其他的服务器上
+    User user = _userModel.query(toid);
+    if(user.getState() == "online")
+    {
+        _redis.pushlish(toid, js.dump());
+        return;
+    }
+
     // toid目标对象不在线，转发消息
     _offlineMsgModel.insert(toid, js.dump());
 }
-
 
 // 添加好友业务
 void ChatService::addFriend(const TcpConnectionPtr &conn, json &js, Timestamp time)
@@ -280,8 +306,33 @@ void ChatService::groupChat(const TcpConnectionPtr &conn, json &js, Timestamp ti
             // 转发消息
             it->second->send(js.dump());
         }else{
-            // 存储离线消息
-            _offlineMsgModel.insert(id, js.dump());
+
+            User user = _userModel.query(userid);
+            if(user.getState() == "online")
+            {
+                _redis.pushlish(id, js.dump());
+            }
+            else
+            {
+                // 存储离线消息
+                _offlineMsgModel.insert(id, js.dump());
+            }
+            
+
         }
     }
+}
+
+// 从 redis 消息队列中获取订阅的信息
+void ChatService::handleRedisSubscribeMessage(int userid, string msg)
+{
+    lock_guard<mutex> lock(_connMutex);
+    auto it = _userConnMap.find(userid);
+    if(it != _userConnMap.end())
+    {
+        it->second->send(msg);
+        return;
+    }
+
+    _offlineMsgModel.insert(userid, msg);
 }

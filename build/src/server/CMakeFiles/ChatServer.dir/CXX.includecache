@@ -33,6 +33,8 @@ friendmodel.hpp
 ../include/server/friendmodel.hpp
 json.hpp
 ../include/server/json.hpp
+redis.hpp
+../include/server/redis.hpp
 
 ../include/server/db/db.h
 string
@@ -79,6 +81,14 @@ string
 ../include/server/model/usermodel.hpp
 user.hpp
 ../include/server/model/user.hpp
+
+../include/server/redis/redis.hpp
+hiredis/hiredis.h
+-
+thread
+-
+functional
+-
 
 ../thirdparty/json.hpp
 algorithm
@@ -429,6 +439,8 @@ muduo/base/Logging.h
 -
 map
 -
+iostream
+-
 
 /home/danna/Desktop/CHAT/src/server/db/db.cpp
 db.h
@@ -471,6 +483,12 @@ usermodel.hpp
 /home/danna/Desktop/CHAT/src/server/model/usermodel.hpp
 db.h
 /home/danna/Desktop/CHAT/src/server/model/db.h
+iostream
+-
+
+/home/danna/Desktop/CHAT/src/server/redis/redis.cpp
+redis.hpp
+/home/danna/Desktop/CHAT/src/server/redis/redis.hpp
 iostream
 -
 

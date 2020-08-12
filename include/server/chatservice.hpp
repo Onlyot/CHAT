@@ -9,6 +9,7 @@
 #include "offlinemessagemodel.hpp"
 #include "friendmodel.hpp"
 #include "json.hpp"
+#include "redis.hpp"
 using namespace std;
 using namespace muduo::net;
 using namespace muduo;
@@ -51,6 +52,9 @@ public:
     // 处理注销业务
     void loginout(const TcpConnectionPtr &conn, json &js, Timestamp time);
 
+    // 处理Redis订阅信息
+    void handleRedisSubscribeMessage(int userid, string msg);
+
 private:
     ChatService();
 
@@ -64,11 +68,14 @@ private:
     // 定义互斥锁保证_userConnMap的线程安全
     mutex _connMutex;
 
-    // 数据操作对象
+    // 数据库表操作对象
     UserModel _userModel;
     OfflineMessageModel _offlineMsgModel;
     FriendModel _friendModel;
     GroupModel _groupModel;
+
+    // redis操作对象
+    Redis _redis;
 }; 
 
 
